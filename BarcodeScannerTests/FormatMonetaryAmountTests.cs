@@ -9,50 +9,47 @@ namespace BarcodeScannerTests
     public class FormatMonetaryAmountTests
     {
         [TestMethod]
-        public void Simplest0()
+        public void Simple()
         {
-            Assert.AreEqual("$7.95", Format(795));
+            Assert.AreEqual("$7.95", new Display().Format(795));
         }
 
         [TestMethod]
-        public void Simplest1()
+        public void Simple1()
         {
-            Assert.AreEqual("$7.89", Format(789));
+            Assert.AreEqual("$7.89", new Display().Format(789));
         }
 
         [TestMethod]
-        public void Simplest2()
+        public void Simple2()
         {
-            Assert.AreEqual("$5.20", Format(520));
+            Assert.AreEqual("$5.20", new Display().Format(520));
         }
 
         [TestMethod]
-        public void Simplest3()
+        public void Simple3()
         {
-            Assert.AreEqual("$4.00", Format(400));
+            Assert.AreEqual("$4.00", new Display().Format(400));
         }
 
         [TestMethod]
         public void Zero()
         {
-            Assert.AreEqual("$0.00", Format(0));
+            Assert.AreEqual("$0.00", new Display().Format(0));
         }
 
         [TestMethod]
-        public void Simplest4()
+        public void Simple4()
         {
-            Assert.AreEqual("$0.02", Format(2));
+            Assert.AreEqual("$0.02", new Display().Format(2));
         }
 
         [TestMethod]
-        public void Simplest5()
+        public void Simple5()
         {
-            Assert.AreEqual("$0.37", Format(37));
+            Assert.AreEqual("$0.37", new Display().Format(37));
         }
 
-        private string Format(int priceInCents)
-        {
-            return string.Format("${0:0.00}", (double)priceInCents / 100);
-        }
+
     }
 }

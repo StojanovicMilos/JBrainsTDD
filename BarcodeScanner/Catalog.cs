@@ -17,7 +17,7 @@ namespace BarcodeScanner
             PricesByBarcodeInCents = pricesByBarcodeInCents;
         }
 
-        internal int GetPrice(string barcode)
+        public int GetPrice(string barcode)
         {
             PricesByBarcodeInCents.TryGetValue(barcode, out int price);
             return price;

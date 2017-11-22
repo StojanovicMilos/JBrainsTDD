@@ -1,4 +1,6 @@
-﻿namespace BarcodeScanner
+﻿using System;
+
+namespace BarcodeScanner
 {
     public class Display
     {
@@ -14,9 +16,14 @@
             this._text = "Error! Empty barcode.";
         }
 
-        public void DisplayPrice(string price)
+        public void DisplayPrice(int price)
         {
-            this._text = price;
+            this._text = Format(price);
+        }
+
+        public void DisplayPurchaseTotal(int sum)
+        {
+            this._text = "Total: " + Format(sum);
         }
 
         public void DisplayProductNotFound(string barcode)
@@ -28,5 +35,12 @@
         {
             this._text = "No sale in progress. Try scanning a product";
         }
+
+        public string Format(int priceInCents)
+        {
+            return string.Format("${0:0.00}", (double)priceInCents / 100);
+        }
+
+        
     }
 }

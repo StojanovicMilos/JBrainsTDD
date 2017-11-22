@@ -31,7 +31,7 @@ namespace BarcodeScannerTests
 
             _sale.OnBarcode("12345");
 
-            Assert.AreEqual("795", _display.GetText());
+            Assert.AreEqual("$7.95", _display.GetText());
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace BarcodeScannerTests
 
             _sale.OnBarcode("23456");
 
-            Assert.AreEqual("1250", _display.GetText());
+            Assert.AreEqual("$12.50", _display.GetText());
         }
 
         [TestMethod]

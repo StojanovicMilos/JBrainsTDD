@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Catalog.cs" />
     <Compile Include="Display.cs" />
+    <Compile Include="FormatMonetary.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale.cs" />

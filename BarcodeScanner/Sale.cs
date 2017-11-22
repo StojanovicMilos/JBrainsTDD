@@ -8,7 +8,7 @@ namespace BarcodeScanner
         private Display _display;
         private Catalog _catalog;
         private int _scannedPrice = -1;
-        private List<int> _scannedPrices = new List<int>();
+        private List<int> _pendingPruchaseItemPrices = new List<int>();
 
         public Sale(Display display, Catalog catalog)
         {
@@ -28,8 +28,8 @@ namespace BarcodeScanner
             if ((price = _catalog.GetPrice(barcode)) != 0)
             {
                 _scannedPrice = price;
-                _scannedPrices.Add(price);
-                _display.DisplayPrice(price.ToString());
+                _pendingPruchaseItemPrices.Add(price);
+                _display.DisplayPrice(price);
             }
             else
                 _display.DisplayProductNotFound(barcode);
@@ -40,18 +40,24 @@ namespace BarcodeScanner
             bool saleInProgress = (_scannedPrice != -1);
             if(saleInProgress)
             {
-                /*int sum = 0;
-                foreach(var itemPrice in _scannedPrices)
-                {
-                    sum += itemPrice;
-                }
-                _display.DisplayPrice("Total: " + sum);*/
-                _display.DisplayPrice("Total: " + _scannedPrice);
+                int sum = PendingPurchaseTotal();
+                _display.DisplayPurchaseTotal(sum);
+                //_display.DisplayPrice(_scannedPrice);
             }
             else
             {
                 _display.DisplayNoSaleInProgressMessage();
             }
+        }
+
+        private int PendingPurchaseTotal()
+        {
+            int sum = 0;
+            foreach (var itemPrice in _pendingPruchaseItemPrices)
+            {
+                sum += itemPrice;
+            }
+            return sum;
         }
     }
 }
