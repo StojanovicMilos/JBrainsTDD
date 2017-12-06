@@ -71,5 +71,25 @@ namespace BarcodeScannerTests
 
             Assert.AreEqual("Total: $24.55", display.GetText());
         }
+
+        [TestMethod]
+        public void SeveralItemsAllNotFound()
+        {
+            Display display = new Display();
+            Catalog catalog = Catalog.CatalogWithoutBarcodes(
+                "product you won't find",
+                "another product you won't find",
+                "third product you won't find");
+            Sale sale = new Sale(display, catalog);
+
+            sale.OnBarcode("product you won't find");
+            sale.OnBarcode("another product you won't find");
+            sale.OnBarcode("third product you won't find");
+            sale.OnTotal();
+
+            Assert.AreEqual("No sale in progress. Try scanning a product", display.GetText());
+        }
+
+
     }
 }

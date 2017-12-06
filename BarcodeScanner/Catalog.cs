@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BarcodeScanner
 {
@@ -17,10 +18,20 @@ namespace BarcodeScanner
             PricesByBarcodeInCents = pricesByBarcodeInCents;
         }
 
+        public Catalog()
+        {
+            PricesByBarcodeInCents = new Dictionary<string, int>();
+        }
+
         public int GetPrice(string barcode)
         {
             PricesByBarcodeInCents.TryGetValue(barcode, out int price);
             return price;
+        }
+
+        public static Catalog CatalogWithoutBarcodes(string barcode1, string barcode2, string barcode3)
+        {
+            return new Catalog();
         }
     }
 }

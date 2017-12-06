@@ -52,8 +52,13 @@ namespace BarcodeScanner
 
         private int PendingPurchaseTotal()
         {
+            return ComputePurchaseTotal(_pendingPruchaseItemPrices);
+        }
+
+        public static int ComputePurchaseTotal(List<int> pendingPruchaseItemPrices)
+        {
             int sum = 0;
-            foreach (var itemPrice in _pendingPruchaseItemPrices)
+            foreach (var itemPrice in pendingPruchaseItemPrices)
             {
                 sum += itemPrice;
             }
