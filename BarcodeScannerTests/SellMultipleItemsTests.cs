@@ -90,6 +90,40 @@ namespace BarcodeScannerTests
             Assert.AreEqual("No sale in progress. Try scanning a product", display.GetText());
         }
 
+        [TestMethod]
+        public void SeveralItemsSomeNotFound()
+        {
+            Display display = new Display();
+            Catalog catalog = new Catalog(new Dictionary<string, int>{
+                { "1", 1200},
+                { "2", 500}
+            });
+            Sale sale = new Sale(display, catalog);
 
+            sale.OnBarcode("1");
+            sale.OnBarcode("you don't know this product");
+            sale.OnBarcode("2");
+            sale.OnTotal();
+
+            Assert.AreEqual("Total: $17.00", display.GetText());
+        }
+
+        [TestMethod]
+        public void SeveralItemsOneOfWhitchOneIsEmpty()
+        {
+            Display display = new Display();
+            Catalog catalog = new Catalog(new Dictionary<string, int>{
+                { "1", 3100},
+                { "2", 460}
+            });
+            Sale sale = new Sale(display, catalog);
+
+            sale.OnBarcode("1");
+            sale.OnBarcode("");
+            sale.OnBarcode("2");
+            sale.OnTotal();
+
+            Assert.AreEqual("Total: $35.60", display.GetText());
+        }
     }
 }
